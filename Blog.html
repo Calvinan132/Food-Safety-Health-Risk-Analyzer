@@ -4,77 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog Dinh Dưỡng & An Toàn Thực Phẩm</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    /* RESET & VARS */
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    :root {
-      --bg-main: #0b0f19;
-      --bg-card: #161f30;
-      --bg-hover: #1e293b;
-      --accent-blue: #3b82f6;
-      --accent-green: #10b981;
-      --accent-cyan: #06b6d4;
-      --accent-orange: #f59e0b;
-      --text-light: #f1f5f9;
-      --text-dim: #94a3b8;
-      --border-color: #243048;
-    }
-
-    body {
-      background-color: var(--bg-main);
-      color: var(--text-light);
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* HEADER */
-        header {
-            background: rgba(11, 15, 25, 0.9);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(8px);
-        }
-
-        .nav-wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--accent-green);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-dim);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-cyan);
-        }
-
     /* HERO */
     .blog-hero {
       text-align: center;
@@ -320,22 +251,8 @@
 </head>
 <body>
 
-  <!-- HEADER -->
-    <header>
-        <div class="container nav-wrapper">
-            <div class="logo">
-                🛡️ FoodSafety Risk Analyzer
-            </div>
-            <ul class="nav-links">
-                <li><a href="./index.html">Trang chủ</a></li>
-                <li><a href="./index.html#tinh-nang">Tính năng</a></li>
-                <li><a href="./Phantich.html">Công cụ phân tích</a></li>
-                <li><a href="./index.html#quy-trinh">Quy trình</a></li>
-                <li><a href="./blog.html">Blog dinh dưỡng</a></li>
-                <li><a href="./index.html#faq">FAQ</a></li>
-            </ul>
-        </div>
-    </header>
+    <!-- HEADER -->
+    <app-header></app-header>
 
   <main class="container">
 
@@ -453,11 +370,7 @@
   </main>
 
   <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      &copy; 2026 FoodSafety Risk Analyzer. Chuyên trang kiến thức an toàn thực phẩm & dinh dưỡng cộng đồng.
-    </div>
-  </footer>
+  <app-footer></app-footer>
 
   <!-- SCRIPT FILTER -->
   <script>
@@ -478,6 +391,6 @@
       });
     }
   </script>
-
+  <script src="main.js"></script>
 </body>
 </html>

@@ -8,78 +8,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; border-radius: 8px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 8px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #475569; }
-        @media print {
-            body { background: #ffffff !important; color: #000000 !important; }
-            header, footer, .no-print { display: none !important; }
-            .lg\:col-span-7 { width: 100% !important; }
-        }
-        /* HEADER */
-        header {
-            background: rgba(11, 15, 25, 0.9);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(8px);
-        }
-
-        .nav-wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--accent-green);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-dim);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-cyan);
-        }
-
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen font-sans">
 <!-- HEADER -->
-    <header>
-        <div class="container nav-wrapper">
-            <div class="logo">
-                🛡️ FoodSafety Risk Analyzer
-            </div>
-            <ul class="nav-links">
-                <li><a href="./index.html">Trang chủ</a></li>
-                <li><a href="./index.html#tinh-nang">Tính năng</a></li>
-                <li><a href="./Phantich.html">Công cụ phân tích</a></li>
-                <li><a href="./index.html#quy-trinh">Quy trình</a></li>
-                <li><a href="./blog.html">Blog dinh dưỡng</a></li>
-                <li><a href="./index.html#faq">FAQ</a></li>
-            </ul>
-        </div>
-    </header>
+    <app-header></app-header>
     <!-- MAIN CONTAINER -->
     <main class="max-w-7xl mx-auto p-4 md:p-8 space-y-6">
         
@@ -221,7 +160,7 @@
             </div>
 
             <!-- CỘT PHẢI: BÁO CÁO & BẢNG ĐÁNH GIÁ CẢNH BÁO -->
-            <div class="lg:col-span-7 bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-700/50 space-y-5">
+            <div class="lg:col-span-7 print:col-span-12 print:block print:w-full bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-700/50 space-y-5">
                 
                 <!-- Báo Cáo Đánh Giá Thực Phẩm -->
                 <div id="foodReportCard" class="bg-slate-900 border border-slate-700/60 p-5 rounded-xl space-y-4">
@@ -636,5 +575,6 @@
         // Khởi chạy mặc định
         calculateRealtime();
     </script>
+    <script src="main.js"></script>
 </body>
 </html>
