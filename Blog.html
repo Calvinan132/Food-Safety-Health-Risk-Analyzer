@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Dinh Dưỡng & An Toàn Thực Phẩm</title>
+  <style>
+    /* RESET & VARS */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    :root {
+      --bg-main: #0b0f19;
+      --bg-card: #161f30;
+      --bg-hover: #1e293b;
+      --accent-blue: #3b82f6;
+      --accent-green: #10b981;
+      --accent-cyan: #06b6d4;
+      --accent-orange: #f59e0b;
+      --text-light: #f1f5f9;
+      --text-dim: #94a3b8;
+      --border-color: #243048;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* HEADER */
+        header {
+            background: rgba(11, 15, 25, 0.9);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+    /* HERO */
+    .blog-hero {
+      text-align: center;
+      padding: 50px 0 30px;
+      background: radial-gradient(circle at 50% 20%, #1e293b 0%, var(--bg-main) 70%);
+    }
+    .blog-hero h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #60a5fa, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .blog-hero p {
+      color: var(--text-dim);
+      max-width: 650px;
+      margin: 0 auto 25px;
+    }
+
+    /* CATEGORY FILTER */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-dim);
+      padding: 8px 18px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--accent-blue);
+      color: #fff;
+      border-color: var(--accent-blue);
+    }
+
+    /* FEATURED POST */
+    .featured-post {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 50px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
+      transition: border-color 0.3s;
+    }
+    .featured-post:hover {
+      border-color: var(--accent-cyan);
+    }
+    .featured-img {
+      width: 100%;
+      height: 260px;
+      background: linear-gradient(135deg, #1e3a8a, #065f46);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+    .tag-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .badge-red { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; }
+    .badge-green { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #10b981; }
+    .badge-blue { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid #3b82f6; }
+
+    .featured-info h2 {
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+    .featured-info p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+    .post-meta {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      display: flex;
+      gap: 15px;
+    }
+
+    /* MAIN CONTENT LAYOUT */
+    .blog-layout {
+      display: grid;
+      grid-template-columns: 2.5fr 1fr;
+      gap: 40px;
+      margin-bottom: 80px;
+    }
+
+    /* POSTS GRID */
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+    }
+    .post-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .post-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-cyan);
+    }
+    .post-thumb {
+      height: 160px;
+      background: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    .post-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .post-body h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      color: #fff;
+      line-height: 1.4;
+    }
+    .post-body p {
+      color: var(--text-dim);
+      font-size: 0.88rem;
+      margin-bottom: 15px;
+      flex: 1;
+    }
+    .btn-read {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .btn-read:hover { text-decoration: underline; }
+
+    /* SIDEBAR */
+    .sidebar-widget {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 25px;
+    }
+    .widget-title {
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 15px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .recent-list {
+      list-style: none;
+    }
+    .recent-list li {
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed var(--border-color);
+    }
+    .recent-list li:last-child { border: none; margin: 0; padding: 0; }
+    .recent-list a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .recent-list a:hover { color: var(--accent-cyan); }
+    .recent-date {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      display: block;
+      margin-top: 3px;
+    }
+
+    /* NEWSLETTER BOX */
+    .newsletter-box {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1));
+      border: 1px solid var(--accent-blue);
+    }
+    .newsletter-input {
+      width: 100%;
+      padding: 10px;
+      background: var(--bg-main);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: #fff;
+      margin-bottom: 10px;
+      outline: none;
+    }
+    .btn-submit {
+      width: 100%;
+      background: var(--accent-blue);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 30px 0;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.88rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .featured-post { grid-template-columns: 1fr; }
+      .blog-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo">
+                🛡️ FoodSafety Risk Analyzer
+            </div>
+            <ul class="nav-links">
+                <li><a href="./Trangchu.html">Trang chủ</a></li>
+                <li><a href="./Trangchu.html#tinh-nang">Tính năng</a></li>
+                <li><a href="./Phantich.html">Công cụ phân tích</a></li>
+                <li><a href="./Trangchu.html#quy-trinh">Quy trình</a></li>
+                <li><a href="./blog.html">Blog dinh dưỡng</a></li>
+                <li><a href="./Trangchu.html#faq">FAQ</a></li>
+            </ul>
+        </div>
+    </header>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="blog-hero">
+      <h1>Kiến Thức Dinh Dưỡng & An Toàn Thực Phẩm</h1>
+      <p>Cập nhật quy chuẩn Y tế, cảnh báo nguy cơ sức khỏe và giải pháp lựa chọn thực phẩm an toàn cho gia đình.</p>
+    </section>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterCategory('all', this)">Tất cả bài viết</button>
+      <button class="filter-btn" onclick="filterCategory('canh-bao', this)">Cảnh báo & Nguy cơ</button>
+      <button class="filter-btn" onclick="filterCategory('dinh-duong', this)">Dinh dưỡng Tim mạch</button>
+      <button class="filter-btn" onclick="filterCategory('tieu-chuan', this)">Tiêu chuẩn & Phụ gia</button>
+    </div>
+
+    <!-- FEATURED POST -->
+    <div class="featured-post">
+      <div class="featured-img">🧂</div>
+      <div class="featured-info">
+        <span class="tag-badge badge-red">Cảnh Báo Nguy Cơ</span>
+        <h2>Tác Hại Của Việc Tiêu Thụ Quá 5g Natri Mỗi Ngày</h2>
+        <p>Hầu hết thực phẩm chế biến sẵn hiện nay đều chứa lượng muối ẩn rất cao. Việc dư thừa Natri kéo dài là nguyên nhân hàng đầu dẫn đến tăng huyết áp và nguy cơ đột quỵ.</p>
+        <div class="post-meta">
+          <span>📅 10/09/2026</span>
+          <span>⏱️ 5 phút đọc</span>
+          <span>✍️ Bác sĩ Dinh dưỡng</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN BLOG LAYOUT -->
+    <div class="blog-layout">
+
+      <!-- LEFT: POSTS GRID -->
+      <div class="posts-grid" id="postsContainer">
+
+        <article class="post-card" data-category="dinh-duong">
+          <div class="post-thumb">🍬</div>
+          <div class="post-body">
+            <span class="tag-badge badge-blue">Dinh dưỡng Tim mạch</span>
+            <h3>Đường Ẩn Trong Thực Phẩm Chế Biến Sẵn</h3>
+            <p>Nhận biết các tên gọi khác của đường (Glucose, Fructose, Corn Syrup) trên nhãn mác để bảo vệ sức khỏe.</p>
+            <a href="#" class="btn-read">Đọc bài viết →</a>
+          </div>
+        </article>
+
+        <article class="post-card" data-category="tieu-chuan">
+          <div class="post-thumb">🏷️</div>
+          <div class="post-body">
+            <span class="tag-badge badge-green">Tiêu chuẩn & Phụ gia</span>
+            <h3>Cách Đọc Nhãn Mác Thực Phẩm Đúng Chuẩn</h3>
+            <p>Hướng dẫn phân tích danh sách thành phần và hiểu đúng về các chỉ số g/100g hoặc mg/kg.</p>
+            <a href="#" class="btn-read">Đọc bài viết →</a>
+          </div>
+        </article>
+
+        <article class="post-card" data-category="canh-bao">
+          <div class="post-thumb">⚠️</div>
+          <div class="post-body">
+            <span class="tag-badge badge-red">Cảnh báo & Nguy cơ</span>
+            <h3>Nguy Cơ Từ Phụ Gia Hàn The Và Borax</h3>
+            <p>Tác hại nghiêm trọng của phụ gia cấm đối với hệ tiêu hóa và phương pháp test nhanh bằng giấy nghệ.</p>
+            <a href="#" class="btn-read">Đọc bài viết →</a>
+          </div>
+        </article>
+
+        <article class="post-card" data-category="tieu-chuan">
+          <div class="post-thumb">📋</div>
+          <div class="post-body">
+            <span class="tag-badge badge-green">Tiêu chuẩn & Phụ gia</span>
+            <h3>Tiêu Chuẩn HACCP Trong Sản Xuất Thực Phẩm</h3>
+            <p>Tìm hiểu hệ thống phân tích mối nguy và kiểm soát điểm tới hạn trong quy trình chế biến công nghiệp.</p>
+            <a href="#" class="btn-read">Đọc bài viết →</a>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- RIGHT: SIDEBAR -->
+      <aside>
+        
+        <!-- WIDGET 1: POPULAR POSTS -->
+        <div class="sidebar-widget">
+          <h3 class="widget-title">Bài Viết Đọc Nhiều</h3>
+          <ul class="recent-list">
+            <li>
+              <a href="#">Top 5 chất phụ gia cần tránh khi chọn thực phẩm cho trẻ em</a>
+              <span class="recent-date">05/09/2026</span>
+            </li>
+            <li>
+              <a href="#">So sánh chỉ số Glycemic Index (GI) của các loại tinh bột</a>
+              <span class="recent-date">02/09/2026</span>
+            </li>
+            <li>
+              <a href="#">Quy chuẩn ngưỡng Natri an toàn theo khuyến nghị WHO</a>
+              <span class="recent-date">28/08/2026</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- WIDGET 2: NEWSLETTER -->
+        <div class="sidebar-widget newsletter-box">
+          <h3 class="widget-title" style="border:none;">📩 Nhận Cảnh Báo An Toàn</h3>
+          <p style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 12px;">Đăng ký để nhận tin tức cập nhật về các lô hàng vi phạm và quy chuẩn mới nhất.</p>
+          <input type="email" class="newsletter-input" placeholder="Nhập email của bạn...">
+          <button class="btn-submit" onclick="alert('Đã đăng ký nhận tin thành công!')">Đăng Ký Ngay</button>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      &copy; 2026 FoodSafety Risk Analyzer. Chuyên trang kiến thức an toàn thực phẩm & dinh dưỡng cộng đồng.
+    </div>
+  </footer>
+
+  <!-- SCRIPT FILTER -->
+  <script>
+    function filterCategory(category, btnElement) {
+      // Update active button state
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      btnElement.classList.add('active');
+
+      // Filter posts
+      const posts = document.querySelectorAll('.post-card');
+      posts.forEach(post => {
+        if (category === 'all' || post.getAttribute('data-category') === category) {
+          post.style.display = 'flex';
+        } else {
+          post.style.display = 'none';
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
